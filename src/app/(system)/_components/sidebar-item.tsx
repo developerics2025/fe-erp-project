@@ -97,7 +97,6 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             {open && <MoreVert sx={{ ml: "auto" }} />}
           </ListItemButton>
 
-          {/* menu popover */}
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -108,15 +107,24 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
               sx: { width: sidebarWidth, mb: 1, borderRadius: 2, boxShadow: 3 },
             }}
           >
-            {item.children?.map((child) => (
-              <MenuItem
-                key={child.label}
-                component={Link}
-                href={child.path || "#"}
-              >
-                {child.label}
-              </MenuItem>
-            ))}
+            {item.children?.map((child) => {
+              const ChildIcon = child.icon;
+              return (
+                <MenuItem
+                  key={child.label}
+                  component={Link}
+                  href={child.path || "#"}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.5,
+                  }}
+                >
+                  {ChildIcon && <ChildIcon fontSize="small" />}{" "}
+                  <Box sx={{ fontSize: "0.9rem" }}>{child.label}</Box>
+                </MenuItem>
+              );
+            })}
           </Menu>
         </Box>
       ) : (
