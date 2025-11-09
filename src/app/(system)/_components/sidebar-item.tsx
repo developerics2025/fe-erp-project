@@ -11,6 +11,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Typography,
   useTheme,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, MoreVert } from "@mui/icons-material";
@@ -23,6 +24,7 @@ interface SidebarItemProps {
   userRole?: string;
   isFooter?: boolean;
   sidebarWidth?: number;
+  companyName?: string;
 }
 
 export const SidebarItem: React.FC<SidebarItemProps> = ({
@@ -31,6 +33,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
   userRole = "admin",
   isFooter = false,
   sidebarWidth,
+  companyName,
 }) => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +45,6 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
   const Icon = item.icon;
 
   const toggleSubmenu = () => setSubmenuOpen(!submenuOpen);
-
   const handleClickFooter = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : e.currentTarget);
   };
@@ -59,6 +61,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
               bgcolor: theme.palette.action.hover,
               px: open ? 2 : 0,
               justifyContent: open ? "space-between" : "center",
+              alignItems: "center",
             }}
           >
             <ListItemIcon
@@ -66,10 +69,35 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             >
               <Icon />
             </ListItemIcon>
-            {open && <ListItemText primary={item.label} />}
-            {open && <MoreVert />}
+
+            {open && (
+              <Box sx={{ flexGrow: 1, ml: 1 }}>
+                <Typography
+                  variant="subtitle1"
+                  fontWeight={500}
+                  sx={{ lineHeight: 1.2 }}
+                >
+                  {item.label === "Company Settings" && companyName
+                    ? companyName
+                    : item.label}
+                </Typography>
+
+                {item.subLabel && (
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ fontSize: "0.75rem" }}
+                  >
+                    {item.subLabel}
+                  </Typography>
+                )}
+              </Box>
+            )}
+
+            {open && <MoreVert sx={{ ml: "auto" }} />}
           </ListItemButton>
 
+          {/* menu popover */}
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
@@ -117,7 +145,17 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             >
               <Icon />
             </ListItemIcon>
-            {open && <ListItemText primary={item.label} />}
+
+            {open && (
+              <ListItemText
+                primary={
+                  <Typography variant="body1" fontWeight={500}>
+                    {item.label}
+                  </Typography>
+                }
+              />
+            )}
+
             {open &&
               hasChildren &&
               (submenuOpen ? <ExpandLess /> : <ExpandMore />)}

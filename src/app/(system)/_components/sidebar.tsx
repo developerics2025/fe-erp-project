@@ -65,6 +65,7 @@ const Sidebar = ({ open, setOpen, userRole }: SidebarProps) => {
             userRole={userRole}
             isFooter={true}
             sidebarWidth={sidebarWidth}
+            companyName="Integrata Corp"
           />
         )}
       </Box>
