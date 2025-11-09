@@ -1,39 +1,23 @@
 "use client";
-import React, { useState } from "react";
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-  IconButton,
-  Typography,
-  Divider,
-  useTheme,
-} from "@mui/material";
-import {
-  DashboardOutlined,
-  FolderOutlined,
-  FolderOpenOutlined,
-  ExpandLess,
-  ExpandMore,
-  SettingsOutlined,
-  FlipOutlined,
-} from "@mui/icons-material";
+
+import React from "react";
+import { Box, List, Divider, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
+import { SIDEBAR_MENU } from "@/constants/sidebar-menu";
+import { SidebarItem } from "./sidebar-item";
 
 interface SidebarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  userRole?: string;
 }
 
-const Sidebar = ({ open, setOpen }: SidebarProps) => {
-  const [submenuOpen, setSubmenuOpen] = useState(false);
+const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, userRole = "admin" }) => {
   const theme = useTheme();
-  const toggleSubmenu = () => setSubmenuOpen(!submenuOpen);
+  const sidebarWidth = open ? 225 : 80;
 
-  const sidebarWidth = open ? 240 : 80;
+  const mainMenu = SIDEBAR_MENU.filter((m) => m.label !== "Company Settings");
+  const footerMenu = SIDEBAR_MENU.find((m) => m.label === "Company Settings");
 
   return (
     <motion.div
@@ -44,110 +28,38 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
         borderRight: `1px solid ${theme.palette.divider}`,
         boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
         height: "100vh",
+        overflow: "hidden",
       }}
       className="flex flex-col justify-between"
     >
-      <div>
-        {/* Logo & Toggle */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            px: 2,
-            py: 3,
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            <img src="/logo192.png" alt="Logo" width={36} height={36} />
-            {open && (
-              <Typography
-                variant="h6"
-                fontWeight={600}
-                color="text.primary"
-                noWrap
-              >
-                Integrata ERP
-              </Typography>
-            )}
-          </Box>
-          {open && (
-            <IconButton size="small" onClick={() => setOpen(false)}>
-              <FlipOutlined />
-            </IconButton>
-          )}
-        </Box>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, px: 2, py: 3 }}>
+        <img src="/logo192.png" alt="Logo" width={36} height={36} />
+        {open && (
+          <Typography variant="h6" fontWeight={600} noWrap>
+            Integrata ERP
+          </Typography>
+        )}
+      </Box>
 
-        {/* Menu */}
-        <List sx={{ px: open ? 2 : 1 }}>
-          <ListItemButton
-            sx={{
-              borderRadius: 2,
-              mb: 1.2,
-              boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
-              bgcolor: theme.palette.action.hover,
-            }}
-          >
-            <ListItemIcon>
-              <DashboardOutlined />
-            </ListItemIcon>
-            {open && <ListItemText primary="Dashboard" />}
-          </ListItemButton>
-
-          <ListItemButton
-            onClick={toggleSubmenu}
-            sx={{
-              borderRadius: 2,
-              mb: 1.2,
-              boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
-              bgcolor: theme.palette.action.hover,
-            }}
-          >
-            <ListItemIcon>
-              <FolderOutlined />
-            </ListItemIcon>
-            {open && <ListItemText primary="Projects" />}
-            {open && (submenuOpen ? <ExpandLess /> : <ExpandMore />)}
-          </ListItemButton>
-
-          <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding sx={{ pl: open ? 4 : 2 }}>
-              {["Project A", "Project B"].map((p) => (
-                <ListItemButton
-                  key={p}
-                  sx={{
-                    borderRadius: 2,
-                    mb: 1,
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
-                    bgcolor: theme.palette.background.default,
-                  }}
-                >
-                  <ListItemIcon>
-                    <FolderOpenOutlined />
-                  </ListItemIcon>
-                  {open && <ListItemText primary={p} />}
-                </ListItemButton>
-              ))}
-            </List>
-          </Collapse>
+      <Box sx={{ flexGrow: 1, overflowY: "auto", overflowX: "hidden" }}>
+        <List sx={{ px: 0 }}>
+          {mainMenu.map((item) => (
+            <SidebarItem key={item.label} item={item} open={open} userRole={userRole} />
+          ))}
         </List>
-      </div>
+      </Box>
 
-      {/* Bottom Settings */}
-      <Box sx={{ p: 2 }}>
+      <Box sx={{mx: 1, position: "relative" }}>
         <Divider sx={{ mb: 1.5 }} />
-        <ListItemButton
-          sx={{
-            borderRadius: 2,
-            boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
-            bgcolor: theme.palette.action.hover,
-          }}
-        >
-          <ListItemIcon>
-            <SettingsOutlined />
-          </ListItemIcon>
-          {open && <ListItemText primary="Company Settings" />}
-        </ListItemButton>
+          {footerMenu && (
+            <SidebarItem
+              item={footerMenu}
+              open={open}
+              userRole={userRole}
+              isFooter={true} 
+              sidebarWidth={sidebarWidth}
+            />
+          )}
       </Box>
     </motion.div>
   );

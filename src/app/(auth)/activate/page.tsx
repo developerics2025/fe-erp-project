@@ -1,4 +1,3 @@
-// app/activate-account/page.tsx
 import { redirect } from "next/navigation";
 import ActivateAccountClient from "./_components/activate-account-client";
 

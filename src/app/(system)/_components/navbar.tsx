@@ -44,17 +44,17 @@ const Navbar = ({ openSidebar, setOpenSidebar }: NavbarProps) => {
       sx={{
         bgcolor: theme.palette.background.paper,
         color: theme.palette.text.primary,
-        // borderBottom: `1px solid ${theme.palette.divider}`,
-        // boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
       }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* Sidebar Toggle (only shown when sidebar closed) */}
-        {!openSidebar && (
-          <IconButton onClick={() => setOpenSidebar(true)} color="inherit">
-            <FlipOutlined />
+          <IconButton onClick={() => setOpenSidebar(!openSidebar)} color="inherit">
+          <FlipOutlined
+            sx={{
+              transform: openSidebar ? "scaleX(-1)" : "scaleX(1)",
+              transition: "transform 0.3s ease",
+            }}
+          />
           </IconButton>
-        )}
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: "auto" }}>
           <DarkModeToggle />
@@ -87,7 +87,6 @@ const Navbar = ({ openSidebar, setOpenSidebar }: NavbarProps) => {
           </Menu>
         </Box>
 
-        {/* Notifications Dropdown */}
         {notifOpen && (
           <motion.div
             className="absolute top-16 right-6"
