@@ -25,9 +25,17 @@ import { DarkModeToggle } from "@/components/ui/dark-mode-toggle";
 interface NavbarProps {
   openSidebar: boolean;
   setOpenSidebar: (open: boolean) => void;
+  mobileOpen: boolean;
+  setMobileOpen: (open: boolean) => void;
+  isMobile: boolean;
 }
-
-const Navbar = ({ openSidebar, setOpenSidebar }: NavbarProps) => {
+const Navbar = ({
+  openSidebar,
+  setOpenSidebar,
+  mobileOpen,
+  setMobileOpen,
+  isMobile,
+}: NavbarProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [notifOpen, setNotifOpen] = useState(false);
   const theme = useTheme();
@@ -47,14 +55,19 @@ const Navbar = ({ openSidebar, setOpenSidebar }: NavbarProps) => {
       }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <IconButton onClick={() => setOpenSidebar(!openSidebar)} color="inherit">
+        <IconButton
+          onClick={() =>
+            isMobile ? setMobileOpen(!mobileOpen) : setOpenSidebar(!openSidebar)
+          }
+          color="inherit"
+        >
           <FlipOutlined
             sx={{
               transform: openSidebar ? "scaleX(-1)" : "scaleX(1)",
               transition: "transform 0.3s ease",
             }}
           />
-          </IconButton>
+        </IconButton>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: "auto" }}>
           <DarkModeToggle />

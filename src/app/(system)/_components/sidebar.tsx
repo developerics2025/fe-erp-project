@@ -12,9 +12,9 @@ interface SidebarProps {
   userRole?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, userRole = "admin" }) => {
+const Sidebar = ({ open, setOpen, userRole }: SidebarProps) => {
   const theme = useTheme();
-  const sidebarWidth = open ? 225 : 80;
+  const sidebarWidth = open ? 220 : 80;
 
   const mainMenu = SIDEBAR_MENU.filter((m) => m.label !== "Company Settings");
   const footerMenu = SIDEBAR_MENU.find((m) => m.label === "Company Settings");
@@ -32,7 +32,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, userRole = "admin" }) 
       }}
       className="flex flex-col justify-between"
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, px: 2, py: 3 }}>
+      <Box
+        sx={{ display: "flex", alignItems: "center", gap: 1.5, px: 2, py: 3 }}
+      >
         <img src="/logo192.png" alt="Logo" width={36} height={36} />
         {open && (
           <Typography variant="h6" fontWeight={600} noWrap>
@@ -44,22 +46,27 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, userRole = "admin" }) 
       <Box sx={{ flexGrow: 1, overflowY: "auto", overflowX: "hidden" }}>
         <List sx={{ px: 0 }}>
           {mainMenu.map((item) => (
-            <SidebarItem key={item.label} item={item} open={open} userRole={userRole} />
+            <SidebarItem
+              key={item.label}
+              item={item}
+              open={open}
+              userRole={userRole}
+            />
           ))}
         </List>
       </Box>
 
-      <Box sx={{mx: 1, position: "relative" }}>
+      <Box sx={{ mx: 1, position: "relative" }}>
         <Divider sx={{ mb: 1.5 }} />
-          {footerMenu && (
-            <SidebarItem
-              item={footerMenu}
-              open={open}
-              userRole={userRole}
-              isFooter={true} 
-              sidebarWidth={sidebarWidth}
-            />
-          )}
+        {footerMenu && (
+          <SidebarItem
+            item={footerMenu}
+            open={open}
+            userRole={userRole}
+            isFooter={true}
+            sidebarWidth={sidebarWidth}
+          />
+        )}
       </Box>
     </motion.div>
   );
