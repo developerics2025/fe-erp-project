@@ -65,9 +65,13 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             }}
           >
             <ListItemIcon
-              sx={{ minWidth: 0, justifyContent: "center", display: "flex" }}
+              sx={{
+                minWidth: 0,
+                justifyContent: "center",
+                display: "flex",
+              }}
             >
-              <Icon />
+              <Icon fontSize="small" />
             </ListItemIcon>
 
             {open && (
@@ -94,7 +98,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
               </Box>
             )}
 
-            {open && <MoreVert sx={{ ml: "auto" }} />}
+            {open && <MoreVert sx={{ ml: "auto" }} fontSize="small" />}
           </ListItemButton>
 
           <Menu
@@ -106,7 +110,6 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             PaperProps={{
               sx: {
                 width: isFooter ? (open ? sidebarWidth : "auto") : sidebarWidth,
-                minWidth: isFooter ? 180 : undefined,
                 borderRadius: 2,
                 boxShadow: 3,
                 overflow: "hidden",
@@ -153,18 +156,23 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             <ListItemIcon
               sx={{
                 minWidth: 0,
-                mr: open ? 2 : 0,
+                mr: open ? 1 : 0,
                 display: "flex",
                 justifyContent: "center",
+                fontSize: "small",
               }}
             >
-              <Icon />
+              <Icon fontSize="small" />
             </ListItemIcon>
 
             {open && (
               <ListItemText
                 primary={
-                  <Typography variant="body1" fontWeight={500}>
+                  <Typography
+                    variant="body2"
+                    fontWeight={500}
+                    sx={{ fontSize: "0.85rem" }}
+                  >
                     {item.label}
                   </Typography>
                 }
@@ -178,7 +186,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 
           {hasChildren && (
             <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding sx={{ pl: open ? 4 : 0 }}>
+              <List component="div" disablePadding sx={{ pl: open ? 1.5 : 0 }}>
                 {item.children!.map((child) => (
                   <SidebarItem
                     key={child.label}

@@ -14,7 +14,7 @@ interface SidebarProps {
 
 const Sidebar = ({ open, setOpen, userRole }: SidebarProps) => {
   const theme = useTheme();
-  const sidebarWidth = open ? 220 : 80;
+  const sidebarWidth = open ? 240 : 80;
 
   const mainMenu = SIDEBAR_MENU.filter((m) => m.label !== "Company Settings");
   const footerMenu = SIDEBAR_MENU.find((m) => m.label === "Company Settings");
