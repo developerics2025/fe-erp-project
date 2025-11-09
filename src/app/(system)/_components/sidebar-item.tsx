@@ -104,7 +104,14 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             anchorOrigin={{ vertical: "top", horizontal: "left" }}
             transformOrigin={{ vertical: "bottom", horizontal: "left" }}
             PaperProps={{
-              sx: { width: sidebarWidth, mb: 1, borderRadius: 2, boxShadow: 3 },
+              sx: {
+                width: isFooter ? (open ? sidebarWidth : "auto") : sidebarWidth,
+                minWidth: isFooter ? 180 : undefined,
+                borderRadius: 2,
+                boxShadow: 3,
+                overflow: "hidden",
+                px: 1,
+              },
             }}
           >
             {item.children?.map((child) => {

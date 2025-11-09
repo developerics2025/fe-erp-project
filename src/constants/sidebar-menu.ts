@@ -44,12 +44,20 @@ export const SIDEBAR_MENU: SidebarMenuItem[] = [
     roles: ["admin"],
     children: [
       {
-        label: "Profile",
+        label: "Application Settings",
         icon: AccountCircleOutlined,
-        path: "/company/profile",
+        path: "/application-settings",
       },
-      { label: "Settings", icon: SettingsOutlined, path: "/company/settings" },
-      { label: "Users", icon: AccountCircleOutlined, path: "/company/users" },
+      {
+        label: "Company Settings",
+        icon: SettingsOutlined,
+        path: "/company-settings",
+      },
+      {
+        label: "Company Management",
+        icon: AccountCircleOutlined,
+        path: "/company-management",
+      },
     ],
   },
 ];
