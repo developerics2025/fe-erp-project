@@ -1,7 +1,9 @@
+import CompanySettings from "./_components/company-settings";
+
 export const metadata = {
-  title: "Integrata ERP | Company Settings",
+  title: "Integrata ERP | Company Management",
 };
 
-export default function CompanySettings() {
-  return <h1>Company Settings</h1>;
+export default function CompanySettingsPage() {
+  return <CompanySettings />;
 }

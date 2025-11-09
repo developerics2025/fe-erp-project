@@ -1,7 +1,9 @@
+import ApplicationSetting from "./_components/application-settings";
+
 export const metadata = {
-  title: "Integrata ERP | Application Settings",
+  title: "Integrata ERP | Company Management",
 };
 
-export default function ApplicationSettings() {
-  return <h1>Application Settings</h1>;
+export default function ApplicationSettingPage() {
+  return <ApplicationSetting />;
 }

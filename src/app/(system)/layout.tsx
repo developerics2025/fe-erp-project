@@ -29,7 +29,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     >
       {showSidebar && (
         <Sidebar
-          open={isMobile ? true : openSidebar} // mobile always full
+          open={isMobile ? true : openSidebar}
           setOpen={isMobile ? setMobileOpen : setOpenSidebar}
         />
       )}
