@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation"; // useSearchParams sudah dihapus
 import { useAuthStore } from "@/stores/auth";
 import { useToast } from "@/hooks/use-toast";
 import { ActivationState } from "@/types/auth";
-import { activateAccountApi } from "../action";
 import Cookies from "js-cookie";
+import { activateAccountApi } from "../../action";
 
 export const useActivateAccount = (token: string) => {
   const router = useRouter();

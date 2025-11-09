@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
-import { useResendActivation } from "../action";
+import { useResendActivation } from "../../action";
 import { useToast } from "@/hooks/use-toast";
 import { ResendResponse } from "@/types/auth";
 

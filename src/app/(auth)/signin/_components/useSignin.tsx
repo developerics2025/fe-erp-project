@@ -1,7 +1,7 @@
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { signInUser } from "../action";
+import { signInUser } from "../../action";
 
 export const useSignIn = () => {
   const router = useRouter();

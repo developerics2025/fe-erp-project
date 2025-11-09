@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { signupSchema, SignupFormValues } from "@/validations/auth-validation";
-import { signupAction } from "../action";
+import { signupAction } from "../../action";
 
 export function useSignup() {
   const toast = useToast();

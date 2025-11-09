@@ -1,7 +1,7 @@
 "use client";
 import { create } from "zustand";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getPlans, postOnboardingStep } from "../action";
+import { getPlans, postOnboardingStep } from "../../action";
 
 type OnboardingState = {
   data: Record<string, any>;
