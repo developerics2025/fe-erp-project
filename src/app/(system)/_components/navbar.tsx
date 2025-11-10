@@ -70,8 +70,6 @@ const Navbar = ({
         </IconButton>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: "auto" }}>
-          <DarkModeToggle />
-
           <Tooltip title="Notifications">
             <IconButton color="inherit" onClick={toggleNotif}>
               <Badge badgeContent={2} color="error">
@@ -79,6 +77,8 @@ const Navbar = ({
               </Badge>
             </IconButton>
           </Tooltip>
+
+          <DarkModeToggle />
 
           <Tooltip title="Profile">
             <IconButton color="inherit" onClick={handleProfileMenu}>

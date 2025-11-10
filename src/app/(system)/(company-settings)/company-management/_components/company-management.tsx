@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ReactFlow, Controls, Background } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import CompanyStackedForm from "./form-company";
 
 const initialNodes = [
   {
@@ -60,9 +61,12 @@ const initialEdges = [
   },
 ];
 
-function Flow() {
+export function CompanyManagement() {
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        Company Management
+      </Typography>
       <Box
         sx={{
           width: "100%",
@@ -77,9 +81,9 @@ function Flow() {
           <Controls />
         </ReactFlow>
       </Box>
-      <Box sx={{ width: "100%", height: "50%", bgcolor: "gray" }}></Box>
+      <Box sx={{ width: "100%", height: "50%" }}>
+        <CompanyStackedForm />
+      </Box>
     </Box>
   );
 }
-
-export default Flow;
